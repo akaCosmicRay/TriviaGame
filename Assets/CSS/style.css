@@ -39,7 +39,7 @@ body {
     font-family: 'Mouse Memoirs', sans-serif;
     font-size: x-large;
     position: absolute;
-    top: 75%;
+    top: 90%;
     left: 55%;
     transform: translate(-50%, -50%);
     
@@ -61,4 +61,24 @@ body {
     padding: 25px 50px 25px 50px;
     font-family: 'Mouse Memoirs', sans-serif;
     font-size: xx-large;
+}
+
+#doneBtn {
+    position: absolute;
+    margin-top: 30%;
+    margin-bottom: 10%;
+    left: 42%;
+    display: none;
+
+}
+
+#show-number {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+    height: 7%;
+    font-family: 'Mouse Memoirs', sans-serif;
+    display: none;
 }

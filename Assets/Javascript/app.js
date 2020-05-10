@@ -1,10 +1,11 @@
 
 let startBtn = document.getElementById('btn');
-let doneBtn;
+let doneBtn = document.getElementById('doneBtn');
 let numberRight = 0;
 let numberWrong = 0;
 let numberUnanswered = 0;
-let timer;
+let timerBtn = document.getElementById('show-number');
+var audio = document.getElementById('myAudio');
 
 const triviaQuestions = [
     {
@@ -74,10 +75,16 @@ const triviaQuestions = [
 ]
 
 startBtn.onclick = function () {
-    console.log("hello!");
+    //console.log("hello!");
+    
+    timerBtn.style.display = "inline";
     startBtn.style.display = "none";
     document.getElementById('text').style.top = "20%";
     document.getElementById('text').style.paddingBottom = "50px";
+    doneBtn.style.display = "inline";
+    
+    
+    
     
 
     for (let j = 0; j < triviaQuestions.length; j++) {
@@ -91,17 +98,64 @@ startBtn.onclick = function () {
             console.log(triviaQuestions[j].answers[i]);
             let circles = $("<input></input>");
             circles.attr("type", "radio");
-            circles.attr("name", "choices");
+            circles.attr("name", "choices" + j);
             circles.attr("value", triviaQuestions[j].answers[i]);
             circles.attr("id", i);
             circles.appendTo(answers);
             let circleName = $("<label>" + triviaQuestions[j].answers[i] + "</label>");
             circleName.appendTo(answers);
+            
 
         }
         answers.appendTo("#quiz");
-
-
     }
+
+    var numTimer = 100;
+    var intervalId;
+
+
+    function run() {
+      clearInterval(intervalId);
+      intervalId = setInterval(decrement, 1000);
+      $("#show-number").html("<h2>" + numTimer + "</h2>");
+    }
+
+    function decrement() {
+      numTimer--;
+      $("#show-number").html("<h2>" + numTimer + "</h2>");
+      if (numTimer === 0) {
+        stop();
+        console.log("Time Up!");
+      }
+    }
+    function stop() {
+      clearInterval(intervalId);
+    }
+    run();
+    audio.play();
+    
 };
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
