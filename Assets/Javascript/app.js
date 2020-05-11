@@ -1,11 +1,15 @@
 
 let startBtn = document.getElementById('btn');
 let doneBtn = document.getElementById('doneBtn');
-let numberRight = 0;
 let numberWrong = 0;
+let numberRight = 0;
 let numberUnanswered = 0;
-let timerBtn = document.getElementById('show-number');
+let timerBtn = document.getElementById('showNumber');
 var audio = document.getElementById('myAudio');
+let quizContainer = document.getElementById('quiz');
+let resultsContainer = document.getElementById('results');
+let resultsBox = document.getElementById('resultsBox');
+
 
 const triviaQuestions = [
     {
@@ -86,6 +90,7 @@ startBtn.onclick = function () {
     
     
     
+    
 
     for (let j = 0; j < triviaQuestions.length; j++) {
 
@@ -117,12 +122,12 @@ startBtn.onclick = function () {
     function run() {
       clearInterval(intervalId);
       intervalId = setInterval(decrement, 1000);
-      $("#show-number").html("<h2>" + numTimer + "</h2>");
+      $("#showNumber").html("<h2>" + numTimer + "</h2>");
     }
 
     function decrement() {
       numTimer--;
-      $("#show-number").html("<h2>" + numTimer + "</h2>");
+      $("#showNumber").html("<h2>" + numTimer + "</h2>");
       if (numTimer === 0) {
         stop();
         console.log("Time Up!");
@@ -133,26 +138,38 @@ startBtn.onclick = function () {
     }
     run();
     audio.play();
+
     
+};
+
+doneBtn.onclick = function (){
+    console.log("hello!");
+    audio.pause();
+    timerBtn.style.display = "none";
+    doneBtn.style.display = "none";
+    quizContainer.style.display = "none";
+    resultsBox.style.display = "inline";
+   
+
+    
+    
+        
+
+
+
+
+
+
+    
+
+
 };
 
 
 
+
+
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

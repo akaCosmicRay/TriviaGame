@@ -43,6 +43,7 @@ body {
     left: 55%;
     transform: translate(-50%, -50%);
     
+    
 }
 
 #quiz > span {
@@ -72,7 +73,7 @@ body {
 
 }
 
-#show-number {
+#showNumber {
     position: absolute;
     top: 35%;
     left: 50%;
@@ -81,4 +82,21 @@ body {
     height: 7%;
     font-family: 'Mouse Memoirs', sans-serif;
     display: none;
+}
+
+#resultsBox {
+    display: none;
+    font-family: 'Mouse Memoirs', sans-serif;
+    font-size: x-large;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-color: black;
+    border-style: solid;
+    border-width: thick;
+    padding: 10px 100px 150px 100px;
+    text-align: center;
+
+
 }
