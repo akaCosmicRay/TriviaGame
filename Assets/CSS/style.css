@@ -95,8 +95,15 @@ body {
     border-color: black;
     border-style: solid;
     border-width: thick;
-    padding: 10px 100px 150px 100px;
+    padding: 20px 110px 50px 100px;
     text-align: center;
-
-
+    list-style: none;
 }
+
+ul,
+li{
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+}
+
+

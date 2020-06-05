@@ -1,4 +1,3 @@
-
 let startBtn = document.getElementById('btn');
 let doneBtn = document.getElementById('doneBtn');
 let numberWrong = 0;
@@ -7,7 +6,7 @@ let numberUnanswered = 0;
 let timerBtn = document.getElementById('showNumber');
 var audio = document.getElementById('myAudio');
 let quizContainer = document.getElementById('quiz');
-let resultsContainer = document.getElementById('results');
+var resultsContainer = document.getElementById('results');
 let resultsBox = document.getElementById('resultsBox');
 
 
@@ -78,26 +77,47 @@ const triviaQuestions = [
     }
 ]
 
+function calcAnswers() {
+    audio.pause();
+    timerBtn.style.display = "none";
+    doneBtn.style.display = "none";
+    quizContainer.style.display = "none";
+    resultsBox.style.display = "inline";
+
+    var selectedAnswer = document.querySelectorAll('input:checked')
+
+    for (t = 0; t < selectedAnswer.length; t++) {
+        console.log("Their Answer: " + selectedAnswer[t].id);
+        var questionNumber = selectedAnswer[t].name.charAt(selectedAnswer[t].name.length - 1);
+        console.log("Question Number: " + questionNumber);
+        var question = triviaQuestions[parseInt(questionNumber)];
+        console.log("Correct Answer: " + question.correctAnswer);
+        if (selectedAnswer[t].id === question.correctAnswer) {
+            numberRight++;
+            console.log("You're Correct!");
+        } else {
+            numberWrong++;
+            console.log("You're Wrong!");
+        }
+    }
+    numberUnanswered = triviaQuestions.length - (numberRight + numberWrong);
+    console.log("Not Answered: " + numberUnanswered);
+    var resultsHtml = "Results!<br><br><ul style ='list-style: none;'><li> Number Right: " + numberRight + "</li><li> Number Wrong: " + numberWrong + "</li><li> Number Unanswered: " + numberUnanswered + "</li></ul>";
+    document.getElementById("resultsBox").innerHTML = resultsHtml;
+}
+
 startBtn.onclick = function () {
     //console.log("hello!");
-    
+
     timerBtn.style.display = "inline";
     startBtn.style.display = "none";
     document.getElementById('text').style.top = "20%";
     document.getElementById('text').style.paddingBottom = "50px";
     doneBtn.style.display = "inline";
-    
-    
-    
-    
-    
 
     for (let j = 0; j < triviaQuestions.length; j++) {
-
-
         let question = $("<p>" + triviaQuestions[j].question + "</p>");
         question.appendTo("#quiz");
-
         let answers = $("<span></span>");
         for (let i in triviaQuestions[j].answers) {
             console.log(triviaQuestions[j].answers[i]);
@@ -109,70 +129,35 @@ startBtn.onclick = function () {
             circles.appendTo(answers);
             let circleName = $("<label>" + triviaQuestions[j].answers[i] + "</label>");
             circleName.appendTo(answers);
-            
-
         }
         answers.appendTo("#quiz");
     }
 
     var numTimer = 100;
     var intervalId;
-
-
     function run() {
-      clearInterval(intervalId);
-      intervalId = setInterval(decrement, 1000);
-      $("#showNumber").html("<h2>" + numTimer + "</h2>");
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000);
+        $("#showNumber").html("<h2>" + numTimer + "</h2>");
     }
-
     function decrement() {
-      numTimer--;
-      $("#showNumber").html("<h2>" + numTimer + "</h2>");
-      if (numTimer === 0) {
-        stop();
-        console.log("Time Up!");
-      }
+        numTimer--;
+        $("#showNumber").html("<h2>" + numTimer + "</h2>");
+        if (numTimer === 0) {
+            stop();
+            //console.log("Time Up!");
+        }
     }
     function stop() {
-      clearInterval(intervalId);
+        clearInterval(intervalId);
+        calcAnswers();
     }
     run();
     audio.play();
-
-    
 };
 
-doneBtn.onclick = function (){
-    console.log("hello!");
-    audio.pause();
-    timerBtn.style.display = "none";
-    doneBtn.style.display = "none";
-    quizContainer.style.display = "none";
-    resultsBox.style.display = "inline";
-   
-
-    
-    
-        
-
-
-
-
-
-
-    
-
+doneBtn.onclick = function () {
+    //console.log("hello!");
+    calcAnswers();
 
 };
-
-
-
-
-
-    
-
-
-
-
-
-
